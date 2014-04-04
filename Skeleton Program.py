@@ -136,7 +136,7 @@ def GetPlayerName():
 #Task 1
 def GetChoiceFromUser():
   Choice = input('Do you think the next card will be higher than the last card (enter y or n)? ')
-  if Choice.lower() != ("y" or "n" or "yes" or "no"):
+  if Choice.lower() not in ["y","yes","n","no"]:
     Choice = "f"
   return Choice[0].lower()
 
