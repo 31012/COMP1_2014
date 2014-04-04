@@ -3,7 +3,7 @@
 # written by the AQA Programmer Team
 # developed in the Python 3.2 programming environment
 # version 2 edited 06/03/2014
-
+#04/04/14 Task one started
 
 import random
 
@@ -133,9 +133,12 @@ def GetPlayerName():
   print()
   return PlayerName
 
+#Task 1
 def GetChoiceFromUser():
   Choice = input('Do you think the next card will be higher than the last card (enter y or n)? ')
-  return Choice
+  if Choice.lower() != ("y" or "n" or "yes" or "no"):
+    Choice = "f"
+  return Choice[0].lower()
 
 def DisplayEndOfGameMessage(Score):
   print()
