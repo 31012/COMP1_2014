@@ -4,6 +4,9 @@
 # developed in the Python 3.2 programming environment
 # version 2 edited 06/03/2014
 #04/04/14 Task one started
+#04/04/14 Task one completed
+#04/04/14 Task two started
+#04/04/14 Task two completed
 
 import random
 
@@ -76,10 +79,13 @@ def DisplayMenu():
   print()
   print('Select an option from the menu (or enter q to quit): ', end='')
 
+#Task 2
 def GetMenuChoice():
   Choice = input()
+  if Choice.lower() not in ["q","quit"]:
+    Choice = "f"
   print()
-  return Choice
+  return Choice[0].lower()
 
 def LoadDeck(Deck):
   CurrentFile = open('deck.txt', 'r')
