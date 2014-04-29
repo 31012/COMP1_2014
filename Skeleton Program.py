@@ -7,9 +7,14 @@
 #04/04/14 Task one completed
 #04/04/14 Task two started
 #04/04/14 Task two completed
+#xx/04/14 Task three started
+#xx/04/14 Task three completed
+#28/04/14 Task four started
+#28/04/14 Task four completed
+#29/04/14 Task five started
 
 import random
-
+import pdb
 NO_OF_RECENT_SCORES = 3
 
 class TCard():
@@ -19,7 +24,7 @@ class TCard():
 
 class TRecentScore():
   def __init__(self):
-    self.Name = ''
+    self.Name = 'N/A'
     self.Score = 0
 
 Deck = [None]
@@ -177,7 +182,15 @@ def DisplayRecentScores(RecentScores):
   print('Recent Scores: ')
   print()
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
-    print(RecentScores[Count].Name, 'got a score of', RecentScores[Count].Score)
+    nameSpace = 4
+    scoreSpace = 5
+    if len(RecentScores[Count].Name) > nameSpace:
+      nameSpace = len(RecentScores[Count].Name)
+    if len(str(RecentScores[Count].Score)) > scoreSpace:
+      scoreSpace = len(str(RecentScores[Count].Score))
+  print("{0:<{1}} {2:<{3}}".format("Name",nameSpace,"Score",scoreSpace))
+  for Count in range(1, NO_OF_RECENT_SCORES + 1):
+    print("{0:<{1}} {2:<{3}}".format(RecentScores[Count].Name,nameSpace,RecentScores[Count].Score,scoreSpace))
   print()
   print('Press the Enter key to return to the main menu')
   input()
@@ -186,29 +199,29 @@ def DisplayRecentScores(RecentScores):
 #Task 4
 def UpdateRecentScores(RecentScores, Score):
   valid = False
-  PlayerName = GetPlayerName()
   while not valid:
     appeScore = input("Do you wish to add your score to the high score table (y or n): ")
-    if appeScore.lower() in ["y","n"]:
-      if appeScore.lower() == "y":
-        FoundSpace = False
-        Count = 1
-        while (not FoundSpace) and (Count <= NO_OF_RECENT_SCORES):
-          if RecentScores[Count].Name == '':
-            FoundSpace = True
-          else:
-            Count = Count + 1
-        if not FoundSpace:
-          for Count in range(1, NO_OF_RECENT_SCORES):
-            RecentScores[Count].Name = RecentScores[Count + 1].Name
-            RecentScores[Count].Score = RecentScores[Count + 1].Score
-          Count = NO_OF_RECENT_SCORES
-        RecentScores[Count].Name = PlayerName
-        RecentScores[Count].Score = Score
-      else:
-        pass
+    if appeScore.lower()[0] in ["y","n"]:
+      valid = True
     else:
       print("Choice not valid.")
+  if appeScore == "y":
+    PlayerName = GetPlayerName()
+    FoundSpace = False
+    Count = 1
+    while (not FoundSpace) and (Count <= NO_OF_RECENT_SCORES):
+      if RecentScores[Count].Name == 'N/A':
+        FoundSpace = True
+      else:
+        Count = Count + 1
+    if not FoundSpace:
+      for Count in range(1, NO_OF_RECENT_SCORES):
+        RecentScores[Count].Name = RecentScores[Count + 1].Name
+        RecentScores[Count].Score = RecentScores[Count + 1].Score
+      Count = NO_OF_RECENT_SCORES
+    RecentScores[Count].Name = PlayerName
+    RecentScores[Count].Score = Score
+
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
   NextCard = TCard()
