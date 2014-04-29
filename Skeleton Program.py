@@ -82,7 +82,7 @@ def DisplayMenu():
 #Task 2
 def GetMenuChoice():
   Choice = input()
-  if Choice.lower() not in ["q","quit"]:
+  if Choice.lower() not in ["1","2","3","4","q","quit"]:
     Choice = "f"
   print()
   return Choice[0].lower()
@@ -133,9 +133,16 @@ def IsNextCardHigher(LastCard, NextCard):
     Higher = True
   return Higher
 
+#Task 3
 def GetPlayerName():
+  valid = False
   print()
-  PlayerName = input('Please enter your name: ')
+  while not valid:
+    PlayerName = input('Please enter your name: ')
+    if len(PlayerName) >= 1:
+      valid = True
+    else:
+      print("You must enter something for your name!")
   print()
   return PlayerName
 
@@ -176,23 +183,32 @@ def DisplayRecentScores(RecentScores):
   input()
   print()
 
+#Task 4
 def UpdateRecentScores(RecentScores, Score):
+  valid = False
   PlayerName = GetPlayerName()
-  FoundSpace = False
-  Count = 1
-  while (not FoundSpace) and (Count <= NO_OF_RECENT_SCORES):
-    if RecentScores[Count].Name == '':
-      FoundSpace = True
+  while not valid:
+    appeScore = input("Do you wish to add your score to the high score table (y or n): ")
+    if appeScore.lower() in ["y","n"]:
+      if appeScore.lower() == "y":
+        FoundSpace = False
+        Count = 1
+        while (not FoundSpace) and (Count <= NO_OF_RECENT_SCORES):
+          if RecentScores[Count].Name == '':
+            FoundSpace = True
+          else:
+            Count = Count + 1
+        if not FoundSpace:
+          for Count in range(1, NO_OF_RECENT_SCORES):
+            RecentScores[Count].Name = RecentScores[Count + 1].Name
+            RecentScores[Count].Score = RecentScores[Count + 1].Score
+          Count = NO_OF_RECENT_SCORES
+        RecentScores[Count].Name = PlayerName
+        RecentScores[Count].Score = Score
+      else:
+        pass
     else:
-      Count = Count + 1
-  if not FoundSpace:
-    for Count in range(1, NO_OF_RECENT_SCORES):
-      RecentScores[Count].Name = RecentScores[Count + 1].Name
-      RecentScores[Count].Score = RecentScores[Count + 1].Score
-    Count = NO_OF_RECENT_SCORES
-  RecentScores[Count].Name = PlayerName
-  RecentScores[Count].Score = Score
-
+      print("Choice not valid.")
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
   NextCard = TCard()
