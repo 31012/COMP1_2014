@@ -12,8 +12,10 @@
 #28/04/14 Task four started
 #28/04/14 Task four completed
 #29/04/14 Task five started
+#02/04/14 Task five completed
 
 import random
+from datetime import date
 import pdb
 NO_OF_RECENT_SCORES = 3
 
@@ -26,6 +28,7 @@ class TRecentScore():
   def __init__(self):
     self.Name = 'N/A'
     self.Score = 0
+    self.Date = None
 
 Deck = [None]
 RecentScores = [None]
@@ -176,10 +179,11 @@ def ResetRecentScores(RecentScores):
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
     RecentScores[Count].Name = ''
     RecentScores[Count].Score = 0
-#Task4
+#Task4 #Task5
 def DisplayRecentScores(RecentScores):
   nameSpace = 4
   scoreSpace = 5
+  dateSpace = 8
   print()
   print('Recent Scores: ')
   print()
@@ -188,9 +192,13 @@ def DisplayRecentScores(RecentScores):
       nameSpace = len(RecentScores[Count].Name)
     if len(str(RecentScores[Count].Score)) > scoreSpace:
       scoreSpace = len(str(RecentScores[Count].Score))
-  print("{0:<{1}} {2:<{3}}".format("Name",nameSpace,"Score",scoreSpace))
+  print("{0:<{1}} {2:<{3}} {4:<{5}}".format("Name",nameSpace,"Score",scoreSpace,"Date",dateSpace))
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
-    print("{0:<{1}} {2:<{3}}".format(RecentScores[Count].Name,nameSpace,RecentScores[Count].Score,scoreSpace))
+    if RecentScores[Count].Date != None:
+      scoreTime = RecentScores[Count].Date.strftime("%y/%m/%d")
+    else:
+      scoreTime = "N/A"
+    print("{0:<{1}} {2:<{3}} {4:<{5}}".format(RecentScores[Count].Name,nameSpace,RecentScores[Count].Score,scoreSpace,scoreTime,dateSpace))
   print()
   print('Press the Enter key to return to the main menu')
   input()
@@ -221,6 +229,7 @@ def UpdateRecentScores(RecentScores, Score):
       Count = NO_OF_RECENT_SCORES
     RecentScores[Count].Name = PlayerName
     RecentScores[Count].Score = Score
+    RecentScores[Count].Date = date.today()
 
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
