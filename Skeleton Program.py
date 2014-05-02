@@ -13,6 +13,7 @@
 #28/04/14 Task four completed
 #29/04/14 Task five started
 #02/04/14 Task five completed
+#02/04/14 Task six started
 
 import random
 from datetime import date
@@ -84,13 +85,14 @@ def DisplayMenu():
   print('2. Play game (without shuffle)')
   print('3. Display recent scores')
   print('4. Reset recent scores')
+  print("5. Options")
   print()
   print('Select an option from the menu (or enter q to quit): ', end='')
 
 #Task 2
 def GetMenuChoice():
   Choice = input()
-  if Choice.lower() not in ["1","2","3","4","q","quit"]:
+  if Choice.lower() not in ["1","2","3","4","5","q","quit"]:
     Choice = "f"
   print()
   return Choice[0].lower()
@@ -231,6 +233,33 @@ def UpdateRecentScores(RecentScores, Score):
     RecentScores[Count].Score = Score
     RecentScores[Count].Date = date.today()
 
+def DisplayOptions():
+  print()
+  print()
+  print("OPTION MENU")
+  print()
+  print("1. Set Ace to be HIGH or LOW")
+  print()
+
+def GetOptionChoice():
+  OptionChoice = input('Select an option from the menu(or enter q to quit)')
+  if OptionChoice[0].lower() not in ["1","q"]:
+    OptionChoice = "f"
+  return OptionChoice[0].lower()
+
+def SetOptions(OptionChoice):
+  while OptionChoice == "f":
+    DisplayOptions()
+    OpionChoice = GetOptionChoice()
+  if OptionChoice == "1":
+    SetAceHighOrLow()
+  if OptionChoice == "q":
+    DisplayMenu()
+    Choice = GetMenuChoice()
+
+def SetAceHighOrLow():
+  pass
+
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
   NextCard = TCard()
@@ -279,3 +308,6 @@ if __name__ == '__main__':
       DisplayRecentScores(RecentScores)
     elif Choice == '4':
       ResetRecentScores(RecentScores)
+    elif Choice == "5":
+      DisplayOptions()
+      OptionChoice = GetOptionChoice()
