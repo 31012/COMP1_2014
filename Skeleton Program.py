@@ -176,14 +176,14 @@ def ResetRecentScores(RecentScores):
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
     RecentScores[Count].Name = ''
     RecentScores[Count].Score = 0
-
+#Task4
 def DisplayRecentScores(RecentScores):
+  nameSpace = 4
+  scoreSpace = 5
   print()
   print('Recent Scores: ')
   print()
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
-    nameSpace = 4
-    scoreSpace = 5
     if len(RecentScores[Count].Name) > nameSpace:
       nameSpace = len(RecentScores[Count].Name)
     if len(str(RecentScores[Count].Score)) > scoreSpace:
@@ -209,13 +209,13 @@ def UpdateRecentScores(RecentScores, Score):
     PlayerName = GetPlayerName()
     FoundSpace = False
     Count = 1
-    while (not FoundSpace) and (Count <= NO_OF_RECENT_SCORES):
+    while (not FoundSpace) and (Count <= NO_OF_RECENT_SCORES+1):
       if RecentScores[Count].Name == 'N/A':
         FoundSpace = True
       else:
         Count = Count + 1
     if not FoundSpace:
-      for Count in range(1, NO_OF_RECENT_SCORES):
+      for Count in range(1, NO_OF_RECENT_SCORES+1):
         RecentScores[Count].Name = RecentScores[Count + 1].Name
         RecentScores[Count].Score = RecentScores[Count + 1].Score
       Count = NO_OF_RECENT_SCORES
