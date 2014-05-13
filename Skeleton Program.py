@@ -18,6 +18,7 @@
 import random
 from datetime import date
 import pdb
+aceHigh = False
 NO_OF_RECENT_SCORES = 3
 
 class TCard():
@@ -107,7 +108,12 @@ def LoadDeck(Deck):
       break
     Deck[Count].Suit = int(LineFromFile)
     LineFromFile = CurrentFile.readline()
-    Deck[Count].Rank = int(LineFromFile)
+    if aceHigh == True:
+      Deck[Count].Rank = int(LineFromFile)
+      if Deck[Count].Rank == 1:
+        Deck[Count].Rank = 14
+    else:
+      Deck[Count].Rank = int(LineFromFile)
     Count = Count + 1
  
 def ShuffleDeck(Deck):
@@ -242,17 +248,16 @@ def DisplayOptions():
   print()
 
 def GetOptionChoice():
-  OptionChoice = input('Select an option from the menu(or enter q to quit): ')
-  if OptionChoice[0].lower() not in ["1","q"]:
-    OptionChoice = "f"
-  else:
-    OptionChoice = OptionChoice
+  valid = False
+  while not valid:
+    OptionChoice = input('Select an option from the menu (or enter q to quit): ')
+    if OptionChoice[0].lower() not in ["1","q"]:
+      print("Choice not valid!")
+    else:
+      valid = True
   return OptionChoice[0].lower()
 
 def SetOptions(OptionChoice):
-  while OptionChoice == "f":
-    DisplayOptions()
-    OpionChoice = GetOptionChoice()
   if OptionChoice == "1":
     SetAceHighOrLow()
   if OptionChoice == "q":
@@ -260,7 +265,21 @@ def SetOptions(OptionChoice):
     Choice = GetMenuChoice()
 
 def SetAceHighOrLow():
-  pass
+  valid = False
+  while not valid:
+    aceHigh = print("Do you want the Ace to be (h)igh or (l)ow (or enter q to quit): ")
+    if aceHigh[0].lower() not in ["h","l","q"]:
+      print("Choice not valid!")
+    else:
+      valid = True
+  if aceHigh[0].lower() == "q":
+    DisplayMenu()
+    Choice = GetMenuChoice()
+  elif aceHigh[0].lower() == "h":
+    global aceHigh = True
+  elif aceHigh[0].lower() == "l":
+    global aceHigh = False
+  
 
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
