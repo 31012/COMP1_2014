@@ -242,9 +242,11 @@ def DisplayOptions():
   print()
 
 def GetOptionChoice():
-  OptionChoice = input('Select an option from the menu(or enter q to quit)')
+  OptionChoice = input('Select an option from the menu(or enter q to quit): ')
   if OptionChoice[0].lower() not in ["1","q"]:
     OptionChoice = "f"
+  else:
+    OptionChoice = OptionChoice
   return OptionChoice[0].lower()
 
 def SetOptions(OptionChoice):
@@ -311,3 +313,4 @@ if __name__ == '__main__':
     elif Choice == "5":
       DisplayOptions()
       OptionChoice = GetOptionChoice()
+      SetOptions(OptionChoice)
