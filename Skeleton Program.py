@@ -14,10 +14,12 @@
 #29/04/14 Task five started
 #02/04/14 Task five completed
 #02/04/14 Task six started
+#16/04/14 Task six completed
 
 import random
 from datetime import date
 import pdb
+
 aceHigh = False
 NO_OF_RECENT_SCORES = 3
 
@@ -38,7 +40,7 @@ Choice = ''
 
 def GetRank(RankNo):
   Rank = ''
-  if RankNo == 1:
+  if RankNo == 1 or RankNo == 14:
     Rank = 'Ace'
   elif RankNo == 2:
     Rank = 'Two'
@@ -265,20 +267,21 @@ def SetOptions(OptionChoice):
     Choice = GetMenuChoice()
 
 def SetAceHighOrLow():
+  global aceHigh
   valid = False
   while not valid:
-    aceHigh = print("Do you want the Ace to be (h)igh or (l)ow (or enter q to quit): ")
-    if aceHigh[0].lower() not in ["h","l","q"]:
+    highOrLow = input("Do you want the Ace to be (h)igh or (l)ow (or enter q to quit): ")
+    if highOrLow[0].lower() not in ["h","l","q"]:
       print("Choice not valid!")
     else:
       valid = True
-  if aceHigh[0].lower() == "q":
+  if highOrLow[0].lower() == "q":
     DisplayMenu()
     Choice = GetMenuChoice()
-  elif aceHigh[0].lower() == "h":
-    global aceHigh = True
-  elif aceHigh[0].lower() == "l":
-    global aceHigh = False
+  elif highOrLow[0].lower() == "h":
+    aceHigh = True
+  elif highOrLow[0].lower() == "l":
+    aceHigh = False
   
 
 def PlayGame(Deck, RecentScores):
