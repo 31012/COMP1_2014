@@ -14,7 +14,8 @@
 #29/04/14 Task five started
 #02/04/14 Task five completed
 #02/04/14 Task six started
-#16/04/14 Task six completed
+#16/05/14 Task six completed
+#16/05/14 Task seven started
 
 import random
 from datetime import date
@@ -189,6 +190,19 @@ def ResetRecentScores(RecentScores):
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
     RecentScores[Count].Name = ''
     RecentScores[Count].Score = 0
+
+def BubbleSortScores(RecentScores):
+  done = False
+  step = NO_OF_RECENT_SCORES + 2
+  while not done:
+    step -= 1
+    for i in range(1, step):
+      if RecentScores[i].Score < RecentScores[i+1].Score:
+        temp = RecentScores[i]
+        temp1 = RecentScores[i+1]
+        RecentScores[i] = temp1
+        RecentScores[i+1] = temp
+        
 #Task4 #Task5
 def DisplayRecentScores(RecentScores):
   nameSpace = 4
@@ -240,7 +254,8 @@ def UpdateRecentScores(RecentScores, Score):
     RecentScores[Count].Name = PlayerName
     RecentScores[Count].Score = Score
     RecentScores[Count].Date = date.today()
-
+#+--------------------------------------------------------------------------+
+#Task 6
 def DisplayOptions():
   print()
   print()
@@ -282,7 +297,7 @@ def SetAceHighOrLow():
     aceHigh = True
   elif highOrLow[0].lower() == "l":
     aceHigh = False
-  
+#+--------------------------------------------------------------------------+  
 
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
